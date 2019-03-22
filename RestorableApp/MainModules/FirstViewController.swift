@@ -38,6 +38,15 @@ extension FirstViewController: UITableViewDataSource, UITableViewDelegate, UIDat
         cell.textLabel?.text = data[indexPath.row].name
         return cell
     }
+
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { return true }
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle { return .delete }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        data.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+
 }
 
 extension FirstViewController: UIViewControllerRestoration {
